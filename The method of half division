@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+const double E = 1e-6;
+double arcsin = 0;
+
+double f(double x) {
+	arcsin = asin(x);
+	return sqrt(1 - 0.4 * pow(x, 2)) - arcsin;
+}
+
+int main() {
+	double a, b, c;
+	cin >> a >> b;
+	while (abs(a - b) > E) {
+		c = (b + a) / 2;
+		if (f(a) * f(c) < 0) {
+			b = c;
+		}
+		else {
+			a = c;
+		}
+		cout << a << " | " << b << " | " << c << " | " << f(a) << " | " << f(c) << " | " << f(a) * f(c) << endl;
+	}
+	cout <<  (a + b) / 2;
+	return 0;
+}
