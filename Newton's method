@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+const double E = 1e-6;
+double arcsin = 0;
+
+double f(double x) {
+	arcsin = asin(x);
+	return sqrt(1 - 0.4 * x * x) - arcsin;
+	}
+
+double f_1(double x) {
+	return -(2 * x / sqrt(25 - 10 * x * x)) - (1 / sqrt(1 - x * x));
+}
+
+double new_x(double x) {
+	return x - f(x) / f_1(x);
+}
+
+int main() {
+	double b = 0.9;
+	while (abs(new_x(b) - b) > E) {
+		cout << b << " " << new_x(b) << " " << abs(new_x(b) - b) << endl;;
+		b = new_x(b);
+		
+	}
+	cout << new_x(b);
+	return 0;
+}
